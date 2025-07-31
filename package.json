@@ -9,9 +9,6 @@
     "start": "next start"
   },
   "dependencies": {
-    "next": "^14.1.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "@emailjs/browser": "^4.4.1",
     "@emotion/is-prop-valid": "latest",
     "@google/generative-ai": "^0.24.1",
@@ -44,10 +41,8 @@
     "@radix-ui/react-toggle-group": "1.1.1",
     "@radix-ui/react-tooltip": "1.1.6",
     "@react-three/fiber": "latest",
+    "@shadcn/ui": "^0.0.4",
     "@studio-freight/lenis": "latest",
-    "autoprefixer": "^10.4.20",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
     "cmdk": "1.0.4",
     "date-fns": "^3.0.0",
     "embla-carousel-react": "8.5.1",
@@ -79,8 +74,6 @@
     "sonner": "^1.7.1",
     "stylus": "latest",
     "sugarss": "latest",
-    "tailwind-merge": "^2.5.5",
-    "tailwindcss-animate": "^1.0.7",
     "terser": "latest",
     "three": "latest",
     "tsx": "latest",
@@ -90,11 +83,16 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
-    "@types/node": "^22",
+    "@types/node": "^22.17.0",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "postcss": "^8.5",
+    "autoprefixer": "^10.4.21",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "postcss": "^8.5.6",
+    "tailwind-merge": "^3.3.1",
     "tailwindcss": "^3.4.17",
+    "tailwindcss-animate": "^1.0.7",
     "typescript": "^5"
   },
   "exports": {
