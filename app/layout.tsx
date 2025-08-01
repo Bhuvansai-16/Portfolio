@@ -11,10 +11,12 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    // Suppress hydration warnings caused by Grammarly extension
     <html lang="en" suppressHydrationWarning>
-      <body suppressHydrationWarning>{children}</body>
+      <body suppressHydrationWarning>
+        <div className="min-h-screen w-full lg:w-[67%] mx-auto">
+          {children}
+        </div>
+      </body>
     </html>
   )
 }
-
