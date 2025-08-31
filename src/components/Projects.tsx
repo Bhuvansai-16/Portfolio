@@ -31,7 +31,7 @@ const projects = [
     description: "A web application that automates the process of publishing books, including formatting and distribution.Built for creators, educators, and knowledge publishers who want fast and intelligent control over book workflows.",
     image: "/image4.png?height=200&width=300",
     tech: ["Python", "Streamlit", "Gemini Api","ChromaDB","NLP"],
-    liveUrl: "",
+    liveUrl: "https://automatedbookpublisher-5ygieavx9nppc6x9zlwdep.streamlit.app/",
     githubUrl: "https://github.com/Bhuvansai-16/Automated_Book_Publisher.git",
   },
   {
