@@ -164,7 +164,7 @@ If someone asks me about a opportunities like what im looking for then u can say
         Authorization: `Bearer ${process.env.GROQ_API_KEY}`,
       },
       body: JSON.stringify({
-        model: "llama3-70b-8192", // ✅ Or whichever model you want
+        model: "openai/gpt-oss-20b", // ✅ Or whichever model you want
         messages: [
           { role: "system", content: systemPrompt },
           { role: "user", content: question },
