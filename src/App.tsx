@@ -13,6 +13,7 @@ import BackgroundWrapper from "./components/BackgroundWrapper"
 import SideMenu from "./components/SideMenu" // Import the new SideMenu
 import LoadingWrapper from "./components/LoadingWrapper"
 import Certifications from "./components/Certifications"
+import { Analytics } from "@vercel/analytics/next"
 
 function App() {
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false)
@@ -25,6 +26,7 @@ function App() {
         <main className={isSideMenuOpen ? "overflow-hidden h-screen" : ""}>
           {" "}
           {/* Prevent scrolling when menu is open */}
+          <Analytics/>
           <Hero />
           <About />
           <Projects />
