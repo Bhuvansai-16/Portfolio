@@ -3,6 +3,7 @@ import { useState } from "react"
 import Navbar from "./components/Navbar"
 import Hero from "./components/Hero"
 import About from "./components/About"
+import Experience from "./components/Experience"
 import Projects from "./components/Projects"
 import GitHubActivity from "./components/GitHubActivity"
 import Contact from "./components/Contact"
@@ -27,6 +28,7 @@ function App() {
           {/* Prevent scrolling when menu is open */}
           <Hero />
           <About />
+          <Experience />
           <Projects />
           <GitHubActivity />
           <Certifications />
