@@ -17,9 +17,10 @@ interface GitHubData {
   }>
 }
 
-const CACHE_KEY = "github_contributions_year"
+const CACHE_KEY_PREFIX = "github_contributions_year_"
 const CACHE_TTL = 6 * 60 * 60 * 1000 // 6 h
 const USER = "Bhuvansai-16"
+const AVAILABLE_YEARS = [2024, 2025, 2026]
 
 export default function GitHubActivity() {
   const ref = useRef(null)
@@ -27,11 +28,12 @@ export default function GitHubActivity() {
   const { theme } = useTheme()
   const dark = theme === "dark"
 
+  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear())
   const [data, setData] = useState<GitHubData | null>(null)
   const [loading, setLoading] = useState(true)
   const [live, setLive] = useState(false)
 
-  const YEAR = new Date().getFullYear()
+  const YEAR = selectedYear
 
   /* ---------- helper: build Jan 1 → Dec 31 ---------- */
   const buildYearRange = (eventMap: Map<string, number>) => {
@@ -55,11 +57,13 @@ export default function GitHubActivity() {
   }
 
   /* ---------- GraphQL fetch ---------- */
-  const fetchGraphQL = async (token: string) => {
+  const fetchGraphQL = async (token: string, year: number) => {
+    const from = `${year}-01-01T00:00:00Z`
+    const to = `${year}-12-31T23:59:59Z`
     const query = `
-      query($login:String!){
+      query($login:String!, $from:DateTime!, $to:DateTime!){
         user(login:$login){
-          contributionsCollection{
+          contributionsCollection(from:$from, to:$to){
             contributionCalendar{
               totalContributions
               weeks{
@@ -74,7 +78,7 @@ export default function GitHubActivity() {
     const res = await fetch("https://api.github.com/graphql", {
       method: "POST",
       headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
-      body: JSON.stringify({ query, variables: { login: USER } }),
+      body: JSON.stringify({ query, variables: { login: USER, from, to } }),
     })
     if (!res.ok) throw new Error("GraphQL error")
     const body = await res.json()
@@ -109,7 +113,8 @@ export default function GitHubActivity() {
   useEffect(() => {
     const load = async () => {
       setLoading(true)
-      const cached = localStorage.getItem(CACHE_KEY)
+      const cacheKey = `${CACHE_KEY_PREFIX}${selectedYear}`
+      const cached = localStorage.getItem(cacheKey)
       if (cached) {
         const { data: d, ts, isLive } = JSON.parse(cached)
         if (Date.now() - ts < CACHE_TTL) {
@@ -121,11 +126,11 @@ export default function GitHubActivity() {
       }
       const token = process.env.NEXT_PUBLIC_GITHUB_TOKEN
       try {
-        const fresh = token ? await fetchGraphQL(token).catch(() => fetchREST(token)) : null
+        const fresh = token ? await fetchGraphQL(token, selectedYear).catch(() => fetchREST(token)) : null
         if (fresh) {
           setData(fresh)
           setLive(true)
-          localStorage.setItem(CACHE_KEY, JSON.stringify({ data: fresh, ts: Date.now(), isLive: true }))
+          localStorage.setItem(cacheKey, JSON.stringify({ data: fresh, ts: Date.now(), isLive: true }))
         } else {
           setData(buildYearRange(new Map())) // demo
         }
@@ -135,11 +140,11 @@ export default function GitHubActivity() {
       setLoading(false)
     }
     load()
-  }, [])
+  }, [selectedYear])
 
   /* ---------- render ---------- */
   const display = data ?? buildYearRange(new Map())
-  const total = display.total[YEAR]
+  const total = display.total[YEAR] ?? 0
 
   return (
     <section id="github-activity" className="py-16 sm:py-20 px-4">
@@ -191,6 +196,26 @@ export default function GitHubActivity() {
                   <div className={`text-xs sm:text-sm ${dark ? "text-white/70" : "text-white/70"}`}>
                     Total Contributions
                   </div>
+                </div>
+                {/* Year selector buttons */}
+                <div className="flex items-center gap-2 ml-4">
+                  {AVAILABLE_YEARS.map((year) => (
+                    <button
+                      key={year}
+                      onClick={() => setSelectedYear(year)}
+                      className={`px-3 py-1 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 ${
+                        selectedYear === year
+                          ? dark
+                            ? "bg-green-500 text-white"
+                            : "bg-emerald-500 text-white"
+                          : dark
+                            ? "bg-white/10 text-white/70 hover:bg-white/20 hover:text-white"
+                            : "bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
+                      }`}
+                    >
+                      {year}
+                    </button>
+                  ))}
                 </div>
               </div>
 
