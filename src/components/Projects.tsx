@@ -13,7 +13,6 @@ const projects = [
     description: "An AI-powered multi-agent research assistant for deep research, literature surveys, and professional report generation with real-time chat, RAG document retrieval, and multi-model support.",
     image: "/maira.png?height=200&width=300",
     tech: ["React", "FastAPI", "LangGraph", "Supabase", "RAG"],
-    liveUrl: "",
     githubUrl: "https://github.com/Bhuvansai-16/MAIRA",
   },
   {
