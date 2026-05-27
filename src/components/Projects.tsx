@@ -9,12 +9,12 @@ import { useTheme } from "../contexts/ThemeContext"
 const projects = [
   {
     id: 1,
-    title: "MCP.Playground",
-    description: "A comprehensive platform for testing and comparing different Model Context Protocol (MCP) implementations with real-time metrics and analytics.",
-    image: "/image.png?height=200&width=300",
-    tech: ["React", "Node.js", "MCP", "Supabase"],
-    liveUrl: "https://mcpplayground.netlify.app/",
-    githubUrl: "https://github.com/Bhuvansai-16/MCP",
+    title: "MAIRA",
+    description: "An AI-powered multi-agent research assistant for deep research, literature surveys, and professional report generation with real-time chat, RAG document retrieval, and multi-model support.",
+    image: "/maira.png?height=200&width=300",
+    tech: ["React", "FastAPI", "LangGraph", "Supabase", "RAG"],
+    liveUrl: "",
+    githubUrl: "https://github.com/Bhuvansai-16/MAIRA",
   },
   {
     id: 2,
