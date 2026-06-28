@@ -62,12 +62,13 @@ You can find more on:
 - Google Developer Profile: https://g.dev/Bhuvansai_Mallareddyuniversity
 
 Projects:
-1)MCP.Playground
-A comprehensive platform for testing and comparing different Model Context Protocol (MCP) implementations with real-time metrics and analytics.
+1)MAIRA
+An AI-powered multi-agent research assistant for deep research, literature surveys, and professional report generation with real-time chat, RAG document retrieval, and multi-model support.
 React
-Node.js
-MCP
+FastAPI
+LangGraph
 Supabase
+RAG
 2)Automatic Grammar Checker
 An AI-powered grammar correction tool that detects and fixes grammatical errors in English text. This application provides users with a corrected version of their input text and optionally highlights the errors for easy comparison.
 React
